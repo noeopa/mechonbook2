@@ -24,7 +24,7 @@ def user_login(request):
 
 class PostListView(View):
     def get(self, request):
-        return redirect('login')  # Siempre redirige al login
+        return redirect('login')  
 
 class PostCreateView(View):
     def get(self, request):
