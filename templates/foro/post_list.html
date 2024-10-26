@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Publicaciones</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'foro/styles.css' %}">
+</head>
+<body>
+    <h1>Lista de Publicaciones</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <strong>{{ post.title }}</strong><br>
+                {{ post.content }}<br>
+                <small>Publicado el: {{ post.date_created }}</small>
+            </li>
+        {% empty %}
+            <li>No hay publicaciones aún.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
