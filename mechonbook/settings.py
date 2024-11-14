@@ -24,8 +24,10 @@ SECRET_KEY = 'django-insecure-bpju^#@*iz7nki^@g@=u6fk#gk@u_i8#e7-*gdu5k%l*yy&s7e
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,7 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'forum',
+    'django_extensions',
 ]
+
+# El modelo del usuario personalizado
+AUTH_USER_MODEL = 'forum.Usuario'
+
+# Las fotos y cosas así que se suban
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Para volver al home despues del login
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'bienvenida' 
+
+LOGIN_URL = '/forum/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,34 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'forum/static')]
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = '/index.html'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
-
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]

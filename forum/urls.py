@@ -1,8 +1,13 @@
 from django.urls import path
-from .views import index, user_login, PostListView, PostCreateView
+from . import views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
+# Definición de las rutas (URLs) para la app 'usuarios'
 urlpatterns = [
-    path('', user_login, name='login'), 
-    path('index/', index, name='index'),
-    path('create/', PostCreateView.as_view(), name='post_create'),
+    path('login/', auth_views.LoginView.as_view(template_name='forum/login.html'), name='login'),
+    path('registro/', views.registro, name='registro'),                   # Ruta para el registro de usuario
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'), # Al cerrar sesión volver al home
+    path('editar-perfil/', views.editar_perfil, name='editar_perfil'),
+    path('cambiar-contraseña/', views.cambiar_contraseña, name='cambiar_contraseña'), 
 ]

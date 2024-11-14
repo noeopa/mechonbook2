@@ -1,24 +1,13 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
-    date_created = models.DateTimeField(auto_now_add=True)
+class Usuario(AbstractUser):
+    foto = models.ImageField(upload_to='fotos/', blank=True, null=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
 
-    def __str__(self):
-        return self.title
-    def __str__(self):
-        return self.title
-    def __str__(self):
-        return f"{self.author}: {self.content[:20]}"
-    
-class Tema(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='temas')
-
-    def __str__(self):
-        return self.title
+class Notificacion(models.Model):
+    usuario = models.ForeignKey(Usuario, related_name='notificaciones', on_delete=models.CASCADE)
+    mensaje = models.CharField(max_length=255)
+    fecha = models.DateTimeField(auto_now_add=True)
